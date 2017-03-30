@@ -1,0 +1,12 @@
+{
+    "name": "hoanganh25991/php-paypal",
+    "authors": [
+        {
+            "name": "Anh Le Hoang",
+            "email": "lehoanganh25991@gmail.com"
+        }
+    ],
+    "require": {
+        "paypal/rest-api-sdk-php": "*"
+    }
+}
