@@ -74,14 +74,14 @@ $clientToken = $gateway->clientToken()->generate();
                     enableShippingAddress: true,
                     shippingAddressEditable: false,
                     shippingAddressOverride: {
-                        recipientName: 'Scruff McGruff',
-                        line1: '1234 Main St.',
+                        recipientName: 'Anh Le Hoang',
+                        line1: '110A Quoc Huong, Thao Dien, Quan 2, Tp.HCM',
                         line2: 'Unit 1',
-                        city: 'Chicago',
-                        countryCode: 'US',
-                        postalCode: '60652',
-                        state: 'IL',
-                        phone: '123.456.7890'
+                        city: 'Ho Chi Minh',
+                        countryCode: 'VN',
+                        postalCode: '70000',
+                        state: '',
+                        phone: '0903865657'
                     }
                 }, function(err, tokenizationPayload) {
                     // Tokenization complete
@@ -91,13 +91,12 @@ $clientToken = $gateway->clientToken()->generate();
                         throw err;
                     }
                     console.log('tokenizationPayload', tokenizationPayload);
-                    console.log(tokenizationPayload);
                     $.ajax({
                         url: 'https://tinker.press/php-paypal/tokenizationPayload.php',
                         method: 'POST',
-                        data: {tokenizationPayload},
-                        success(ress){
-                            
+                        data: {tokenizationPayload: JSON.stringify(tokenizationPayload)},
+                        success(res){
+                            console.log(res);
                         },
                         complete(res){
                             console.log('response from tokenizationPayload.php', res);
