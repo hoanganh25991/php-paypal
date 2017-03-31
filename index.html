@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>Pay with paypal</h1>
+<button id="btn_get_client_token">Get client token</button>
 <script src="https://www.paypalobjects.com/api/button.js?"
 		data-merchant="braintree"
 		data-id="paypal-button"
@@ -15,6 +16,8 @@
 		data-button_type="submit"
 		data-button_disabled="false"
 ></script>
+<!--jquery for easy ajax call-->
+<script src="js/jquery.min.js"></script>
 <!-- Load the required components. -->
 <script src="https://js.braintreegateway.com/web/3.11.0/js/client.min.js"></script>
 <script src="https://js.braintreegateway.com/web/3.11.0/js/paypal.min.js"></script>
@@ -22,8 +25,23 @@
 <!-- Use the components. We'll see usage instructions next. -->
 <!--suppress JSUnresolvedVariable -->
 <script>
+    let btn_get_client_token = document.querySelector('#btn_get_client_token');
+    btn_get_client_token.addEventListener('click', function(){
+        $.ajax({
+            url: '',
+            method: 'POST',
+            success(res){
+                console.log(res);
+            }
+        });
+    });
+
+
+
 	// Fetch the button you are using to initiate the PayPal flow
 	var paypalButton = document.getElementById('paypal-button');
+
+
 
 	// Create a Client component
 	braintree.client.create({
