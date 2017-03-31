@@ -91,7 +91,18 @@ $clientToken = $gateway->clientToken()->generate();
                         throw err;
                     }
                     console.log('tokenizationPayload', tokenizationPayload);
-                    console.log(tokenizationPayload)
+                    console.log(tokenizationPayload);
+                    $.ajax({
+                        url: 'https://tinker.press/php-paypal/tokenizationPayload.php',
+                        method: 'POST',
+                        data: {tokenizationPayload},
+                        success(ress){
+                            
+                        },
+                        complete(res){
+                            console.log('response from tokenizationPayload.php', res);
+                        }
+                    });
                 });
             });
         });
