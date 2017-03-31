@@ -1,4 +1,11 @@
 <?php
+$post_json = json_encode($_POST);
+
+$after_success_transaction_log = fopen('after_success_transaction_log', 'a');
+
+fwrite($after_success_transaction_log, $post_json);
+
+fclose($after_success_transaction_log);
 ?>
 <!doctype html>
 <html lang="en">
