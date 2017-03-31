@@ -29,7 +29,7 @@ if(isset($_POST['tokenizationPayload'])){
             $gateway
                 ->transaction()
                 ->sale([
-                    "amount"             => 10,
+                    "amount"             => 100,
                     'merchantAccountId'  => 'USD',
                     "paymentMethodNonce" => $tokenizationPayload['nonce'],
 //                    "company" => "OUS",

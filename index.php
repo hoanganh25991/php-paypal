@@ -74,14 +74,14 @@ $clientToken = $gateway->clientToken()->generate();
                     enableShippingAddress: true,
                     shippingAddressEditable: false,
                     shippingAddressOverride: {
-                        recipientName: 'Anh Le Hoang',
-                        line1: '110A Quoc Huong, Thao Dien, Quan 2, Tp.HCM',
+                        recipientName: 'Scruff McGruff',
+                        line1: '1234 Main St.',
                         line2: 'Unit 1',
-                        city: 'Ho Chi Minh',
-                        countryCode: 'VN',
-                        postalCode: '70000',
-                        state: '',
-                        phone: '0903865657'
+                        city: 'Chicago',
+                        countryCode: 'US',
+                        postalCode: '60652',
+                        state: 'IL',
+                        phone: '123.456.7890'
                     }
                 }, function(err, tokenizationPayload) {
                     // Tokenization complete
