@@ -25,6 +25,8 @@ if(isset($_POST['tokenizationPayload'])){
         'accessToken' => $accessToken,
     ));
 
+    $amount = rand(10,100);
+
     try{
         $result =
             $gateway
@@ -53,7 +55,7 @@ if(isset($_POST['tokenizationPayload'])){
 ////                    ]
 //                ]);
                 ->sale([
-                    'amount' => '10.00',
+                    'amount' => $amount,
                     'paymentMethodNonce' => $tokenizationPayload['nonce'],
                     'options' => [
                         'submitForSettlement' => true

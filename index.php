@@ -66,9 +66,10 @@ $clientToken = $gateway->clientToken()->generate();
             console.log('paypalInstance', paypalInstance);
             paypalButton.addEventListener('click', function() {
                 // Tokenize here!
+                let amount = Math.floor(Math.random()*100 + 10);
                 paypalInstance.tokenize({
                     flow: 'checkout', // Required
-                    amount: 10.00, // Required
+                    amount: amount, // Required
                     currency: 'USD', // Required
                     locale: 'en_US',
                     enableShippingAddress: true,
