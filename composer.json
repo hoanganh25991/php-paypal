@@ -8,6 +8,7 @@
     ],
     "require": {
         "braintree/braintree_php" : "3.22.0",
-        "paypal/rest-api-sdk-php": "*"
+        "paypal/rest-api-sdk-php": "*",
+        "buuum/s3": "*"
     }
 }
