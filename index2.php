@@ -16,7 +16,7 @@
 
         payment: function(resolve, reject) {
 
-            var CREATE_PAYMENT_URL = 'https://tinker.press/php-paypal/create-payment.php';
+            var CREATE_PAYMENT_URL = 'https://tinker.press/php-paypal/sample/payments/create-payment.php';
 
             return paypal.request.post(CREATE_PAYMENT_URL)
                          .then(function(data) { resolve(data.paymentID); })
@@ -27,7 +27,7 @@
 
             // Note: you can display a confirmation page before executing
 
-            var EXECUTE_PAYMENT_URL = 'https://tinker.press/php-paypal/execute-payment.php';
+            var EXECUTE_PAYMENT_URL = 'https://tinker.press/php-paypal/sample/payments/execute-payment.php';
 
             return paypal.request.post(EXECUTE_PAYMENT_URL,
                 { paymentID: data.paymentID, payerID: data.payerID })
