@@ -29,7 +29,7 @@ if(isset($_POST['tokenizationPayload'])){
             $gateway
                 ->transaction()
                 ->sale([
-                    "amount"             => 100,
+                    "amount"             => 10.00,
                     'merchantAccountId'  => 'USD',
                     "paymentMethodNonce" => $tokenizationPayload['nonce'],
 //                    "company" => "OUS",
@@ -53,6 +53,13 @@ if(isset($_POST['tokenizationPayload'])){
                 $msg = [
                     'Success ID' => $result->transaction->id
                 ];
+
+                $transaction_log = fopen('transaction_log', 'a');
+                $datetime = date('Y-m-d H:i:s');
+                $transaction_id = $result->transaction->id;
+                fwrite($transaction_log, "[$datetime] transaction id: $transaction_id");
+                fclose($transaction_log);
+
             } else if ($result->errors->deepSize() > 0) {
                 echo "<pre>";
                 print_r($result->errors);
