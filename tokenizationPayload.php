@@ -1,6 +1,7 @@
 <?php
 require __DIR__  . '/vendor/autoload.php';
 use Braintree\Gateway;
+use Braintree\Transaction;
 
 
 
@@ -47,6 +48,9 @@ if(isset($_POST['tokenizationPayload'])){
                         "postalCode" => "60103",
                         "countryCodeAlpha2" => "US"
                     ],
+//                    'options' => [
+//                        'submitForSettlement' => true
+//                    ]
                 ]);
 
             if ($result->success) {
@@ -57,9 +61,19 @@ if(isset($_POST['tokenizationPayload'])){
                 $transaction_log = fopen('transaction_log', 'a');
                 $datetime = date('Y-m-d H:i:s');
                 $transaction_id = $result->transaction->id;
-                fwrite($transaction_log, "[$datetime] transaction id: $transaction_id");
-                fclose($transaction_log);
+                fwrite($transaction_log, "[$datetime] transaction id: $transaction_id \n");
 
+                $result = $gateway->transaction()->submitForSettlement('the_transaction_id');
+
+                if ($result->success) {
+                    $settledTransaction = $result->transaction;
+                    fwrite(var_export($settledTransaction));
+                } else {
+                    echo "<pre>";
+                    print_r($result->errors);
+                }
+
+                fclose($transaction_log);
             } else if ($result->errors->deepSize() > 0) {
                 echo "<pre>";
                 print_r($result->errors);
