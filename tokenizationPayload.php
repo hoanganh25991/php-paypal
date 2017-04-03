@@ -29,28 +29,35 @@ if(isset($_POST['tokenizationPayload'])){
         $result =
             $gateway
                 ->transaction()
+//                ->sale([
+//                    "amount"             => 10.00,
+//                    'merchantAccountId'  => 'USD',
+//                    "paymentMethodNonce" => $tokenizationPayload['nonce'],
+////                    "company" => "OUS",
+//                    "descriptor" => [
+//                        "name" => "cmp*productdescription",
+//                    ],
+//                    "shipping" => [
+//                        "firstName" => "Jen",
+//                        "lastName" => "Smith",
+//                        "company" => "Braintree",
+//                        "streetAddress" => "1 E 1st St",
+//                        "extendedAddress" => "Suite 403",
+//                        "locality" => "Bartlett",
+//                        "region" => "IL",
+//                        "postalCode" => "60103",
+//                        "countryCodeAlpha2" => "US"
+//                    ],
+////                    'options' => [
+////                        'submitForSettlement' => true
+////                    ]
+//                ]);
                 ->sale([
-                    "amount"             => 10.00,
-                    'merchantAccountId'  => 'USD',
-                    "paymentMethodNonce" => $tokenizationPayload['nonce'],
-//                    "company" => "OUS",
-                    "descriptor" => [
-                        "name" => "cmp*productdescription",
-                    ],
-                    "shipping" => [
-                        "firstName" => "Jen",
-                        "lastName" => "Smith",
-                        "company" => "Braintree",
-                        "streetAddress" => "1 E 1st St",
-                        "extendedAddress" => "Suite 403",
-                        "locality" => "Bartlett",
-                        "region" => "IL",
-                        "postalCode" => "60103",
-                        "countryCodeAlpha2" => "US"
-                    ],
-//                    'options' => [
-//                        'submitForSettlement' => true
-//                    ]
+                    'amount' => '10.00',
+                    'paymentMethodNonce' => $tokenizationPayload['nonce'],
+                    'options' => [
+                        'submitForSettlement' => true
+                    ]
                 ]);
 
             if ($result->success) {
@@ -67,20 +74,20 @@ if(isset($_POST['tokenizationPayload'])){
                 $transaction_id = $result->transaction->id;
                 fwrite($transaction_log, "[$datetime] transaction id: $transaction_id \n");
 
-                $result = $gateway->transaction()->submitForSettlement('the_transaction_id');
+                //$result = $gateway->transaction()->submitForSettlement($transaction_id);
 
-                if ($result->success) {
-                    /**
-                     * Try to settle transaction
-                     * If not, it only pending on buyer account
-                     * Pending request >>> can not run refund|void
-                     */
-                    $settledTransaction = $result->transaction;
-                    fwrite(var_export($settledTransaction));
-                } else {
-                    echo "<pre>";
-                    print_r($result->errors);
-                }
+//                if ($result->success) {
+//                    /**
+//                     * Try to settle transaction
+//                     * If not, it only pending on buyer account
+//                     * Pending request >>> can not run refund|void
+//                     */
+//                    $settledTransaction = $result->transaction;
+//                    fwrite(var_export($settledTransaction));
+//                } else {
+//                    echo "<pre>";
+//                    print_r($result->errors);
+//                }
 
                 fclose($transaction_log);
             } else if ($result->errors->deepSize() > 0) {
