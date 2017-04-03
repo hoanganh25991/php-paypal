@@ -58,6 +58,10 @@ if(isset($_POST['tokenizationPayload'])){
                     'Success ID' => $result->transaction->id
                 ];
 
+                /**
+                 * Store transaction id for later use
+                 * To refund|void it later
+                 */
                 $transaction_log = fopen('transaction_log', 'a');
                 $datetime = date('Y-m-d H:i:s');
                 $transaction_id = $result->transaction->id;
@@ -66,6 +70,11 @@ if(isset($_POST['tokenizationPayload'])){
                 $result = $gateway->transaction()->submitForSettlement('the_transaction_id');
 
                 if ($result->success) {
+                    /**
+                     * Try to settle transaction
+                     * If not, it only pending on buyer account
+                     * Pending request >>> can not run refund|void
+                     */
                     $settledTransaction = $result->transaction;
                     fwrite(var_export($settledTransaction));
                 } else {
