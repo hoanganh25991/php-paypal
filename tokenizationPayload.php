@@ -58,7 +58,7 @@ if(isset($_POST['tokenizationPayload'])){
                     'amount' => $amount,
                     'paymentMethodNonce' => $tokenizationPayload['nonce'],
                     'options' => [
-                        'submitForSettlement' => true
+//                        'submitForSettlement' => true
                     ]
                 ]);
 
