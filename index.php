@@ -107,5 +107,8 @@ $clientToken = $gateway->clientToken()->generate();
         });
     });
 </script>
+<!--<div id="dropin-container"></div>-->
+<!--<button id="submit-button">Purchase</button>-->
+<!--<script src="https://js.braintreegateway.com/web/dropin/1.0.0-beta.6/js/dropin.min.js"></script>-->
 </body>
 </html>
